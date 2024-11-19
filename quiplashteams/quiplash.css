@@ -1,0 +1,113 @@
+* {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    font-family: Ubuntu, Arial;
+}
+
+body {
+    padding: 0 0 300px 0;
+    background-color: rgb(43, 113, 151);
+}
+
+button {
+    box-sizing: border-box;
+}
+
+#content-title {
+    width: 100%;
+    text-align: center;
+    color: white;
+    height: 75px;
+    line-height: 75px;
+}
+
+#refresh-button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 100px;
+    height: 50px;
+    color: white;
+    background-color: rgb(94, 185, 234);
+    border-radius: 5px;
+    border-width: 0;
+    font-size: 20px;
+
+    transition: background-color 0.15s, box-shadow 0.15s;
+}
+
+#refresh-button:hover {
+    background-color: rgb(65, 172, 230);
+    box-shadow: 10px 10px 61px -27px rgba(0,0,0,0.75);
+}
+
+#refresh-button:active {
+    background-color: rgb(36, 160, 227);
+}
+
+#input-area {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 40px;
+
+    box-sizing: border-box;
+
+    margin: 30px 0 0 0;
+
+}
+
+#name-input {
+    width: 70%;
+    height: 100%;
+
+    border-radius: 5px;
+    border: none;
+
+    padding: 0 0 0 10px;
+
+}
+
+#name-input:focus {
+    outline: none;
+}
+
+#search-button {
+    width: 15%;
+    height: 100%;
+    display: inline-block;
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+    margin-left: -10px;
+
+    background-color:rgb(143, 209, 253);
+
+    font-size:  20px;
+
+    transition: background-color 0.15s;
+}
+
+#search-button:hover {
+
+    background-color:rgb(108, 196, 255);
+
+}
+
+#search-button:active {
+    background-color:rgb(55, 175, 255);
+}
+
+#result {
+    width: 100%;
+    padding : 0 0 0 0;
+    margin: 100px 0 0 0;
+    font-size: 50px;
+    color: white;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+}

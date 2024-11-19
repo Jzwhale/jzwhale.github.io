@@ -6,14 +6,28 @@
 
         <title>Quiplash Team Checker</title>
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+
         <link rel="stylesheet" href="quiplash.css">
         <script src="quiplash.js"></script>
 
     </head>
 
     <body>
-        <h1>Quiplash Team Checker</h1>
+
+        <h1 id="content-title">Quiplash Team Checker</h1>
+
+        <button type="button" id="refresh-button">Refresh</button>
         
+        <div id="input-area">
+            <input type="text" placeholder="Enter names (comma separated)" id="name-input">
+            <button type="button" id="search-button">Go</button>
+        </div>
+
+        <p id="result"></p>
+
     </body>
 
 </html>
