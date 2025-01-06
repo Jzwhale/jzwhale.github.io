@@ -50,8 +50,7 @@ async function getTeamData() {
             headers: {
                 "Accept-Language": "en-US,en;q=0.9,es;q=0.8",
                 "Accept": "application/json",
-                "User-Agent": window.navigator.userAgent,
-                "Access-Control-Allow-Origin": "https://jzwhale.github.io/"
+                "User-Agent": window.navigator.userAgent
             }
         })
 
