@@ -111,3 +111,7 @@ button {
     height: 50px;
     line-height: 50px;
 }
+
+a {
+    color:rgb(112, 182, 220);
+}
