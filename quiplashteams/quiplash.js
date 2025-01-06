@@ -48,9 +48,10 @@ async function getTeamData() {
         const request = await fetch(baseLink + urlSafeBase64Encode(JSON.stringify(requestParams)), {
             method: "GET",
             headers: {
-                "Accept-Language": "en-US",
+                "Accept-Language": "en-US,en;q=0.9,es;q=0.8",
                 "Accept": "application/json",
-                "User-Agent": window.navigator.userAgent
+                "User-Agent": window.navigator.userAgent,
+                "Access-Control-Allow-Origin": "https://jzwhale.github.io/"
             }
         })
 
