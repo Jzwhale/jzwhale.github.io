@@ -1,40 +1,66 @@
-const apiLink = "https://www.speedrun.com/api/v1/leaderboards/3dxkxk41/category/jdry50l2"
+const baseLink = "https://www.speedrun.com/api/v2/GetGameLeaderboard2?_r="
+
+function urlSafeBase64Encode(str) {
+    return btoa(str)
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/, '')
+}
 
 function setsHaveSameValues(set1, set2) {
+
     if (set1.size !== set2.size) {
-      return false
-    }
-  
-    for (const value of set1) {
-      if (!set2.has(value)) {
         return false
-      }
     }
-  
+
+    for (const value of set1) {
+        if (!set2.has(value)) {
+            return false
+        }
+    }
+
     return true
-  }
+
+}
 
 async function getTeamData() {
     
-    const request = await fetch(apiLink)
+    const requestParams = {
+        "params":{
+            "categoryId":"jdry50l2",
+            "emulator":1,
+            "gameId":"3dxkxk41",
+            "obsolete":0,
+            "platformIds":[],
+            "regionIds":[],
+            "timer":0,
+            "verified":1,
+            "values":[],
+            "video":0
+        },
+        "page":1
+    }
 
-    if (!request.ok) return -1
+    const teams = {}
 
-    // jsoon
-    const response = await request.json()
+    while (true) {
 
-    const teams = []
-    const runs = response.data.runs
+        const request = await fetch(baseLink + urlSafeBase64Encode(JSON.stringify(requestParams)))
 
-    for (let i = 0; i < runs.length; i++) {
-        const run = runs[i].run
-        const players = run.players
-        const newTeam = []
-        for (let player in players) {
-            let playerObj = players[player]
-            newTeam.push(playerObj.id)
+        if (!request.ok) return -1
+
+        const response = await request.json()
+
+        const runs = response.runList
+
+        for (const run of runs) {
+            teams[run.id] = run.playerIds
         }
-        teams.push(newTeam)
+
+        if (response.pagination.page == response.pagination.pages) break;
+
+        requestParams.page += 1
+
     }
 
     return teams
@@ -61,8 +87,12 @@ window.addEventListener("load", async () => {
 
     // Func /////////
     refreshButton.onclick = async () => {
+        refreshButton.innerHTML = "Refreshing..."
+        searchButton.disabled = true;
         teamCache = await getTeamData()
         sessionStorage.setItem("teamCache", JSON.stringify(teamCache))
+        refreshButton.innerHTML = "Refresh"
+        searchButton.disabled = false;
     }
 
     searchButton.onclick = async () => {
@@ -115,22 +145,21 @@ window.addEventListener("load", async () => {
         }
 
         // find the run maybe?
-        let found = false
+        let foundRun = false
         const checkingTeam = new Set(userIds)
-        for (let team in teamCache) {
-            if (teamCache[team].length != userIds.length) continue
-            const otherTeamSet = new Set(teamCache[team])
-            console.log(checkingTeam, otherTeamSet)
+        for (const [runId, team] of Object.entries(teamCache)) {
+            if (team.length != userIds.length) continue
+            const otherTeamSet = new Set(team)
             if (setsHaveSameValues(otherTeamSet, checkingTeam)) {
-                found = true
+                foundRun = runId
                 break
             }
         }
 
-        if (found) {
-            resultText.innerHTML = "yeah u did that already.."
+        if (foundRun) {
+            resultText.innerHTML = `<span><a href="https://www.speedrun.com/quiplash/runs/${foundRun}" target=_blank>Already Done</a></span>`
         } else {
-            resultText.innerHTML = "ur good! Good luck"
+            resultText.innerHTML = "You're good! Good luck!"
         }
 
     }
