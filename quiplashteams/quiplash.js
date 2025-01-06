@@ -45,7 +45,14 @@ async function getTeamData() {
 
     while (true) {
 
-        const request = await fetch(baseLink + urlSafeBase64Encode(JSON.stringify(requestParams)))
+        const request = await fetch(baseLink + urlSafeBase64Encode(JSON.stringify(requestParams)), {
+            method: "GET",
+            headers: {
+                "Accept-Language": "en-US",
+                "Accept": "application/json",
+                "User-Agent": window.navigator.userAgent
+            }
+        })
 
         if (!request.ok) return -1
 
