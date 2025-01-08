@@ -21,10 +21,8 @@ button {
     line-height: 75px;
 }
 
-#refresh-button {
+.top-right-button {
     position: fixed;
-    top: 10px;
-    right: 10px;
     width: 100px;
     height: 50px;
     color: white;
@@ -36,13 +34,29 @@ button {
     transition: background-color 0.15s, box-shadow 0.15s;
 }
 
-#refresh-button:hover {
+.top-right-button:hover {
     background-color: rgb(65, 172, 230);
     box-shadow: 10px 10px 61px -27px rgba(0,0,0,0.75);
 }
 
-#refresh-button:active {
+.top-right-button:active {
     background-color: rgb(36, 160, 227);
+}
+
+#refresh-button {
+    
+    top: 10px;
+    right: 10px;
+    
+}
+
+#bookmarklet-button {
+
+    top: 65px;
+    right: 10px;
+    font-size: 10px;
+    height: 30px;
+
 }
 
 #input-area {

@@ -45,12 +45,13 @@ async function getTeamData() {
 
     while (true) {
 
+        let headers = new Headers();
+        headers.append("accept-language", "en-US,en;q=0.9,es;q=0.8");
+        headers.append("accept", "application/json");
+
         const request = await fetch(baseLink + urlSafeBase64Encode(JSON.stringify(requestParams)), {
             method: "GET",
-            headers: {
-                "Accept-Language": "en-US,en;q=0.9,es;q=0.8",
-                "Accept": "application/json"
-            }
+            headers: headers
         })
 
         if (!request.ok) return -1
@@ -77,6 +78,7 @@ window.addEventListener("load", async () => {
 
     // Elements //////
     const refreshButton = document.getElementById("refresh-button")
+    const bookmarkletButton = document.getElementById("bookmarklet-button")
     const searchButton = document.getElementById("search-button")
     const nameInput = document.getElementById("name-input")
     const resultText = document.getElementById("result")
@@ -167,6 +169,12 @@ window.addEventListener("load", async () => {
         } else {
             resultText.innerHTML = "You're good! Good luck!"
         }
+
+    }
+
+    bookmarkletButton.onclick = async () => {
+
+        window.open("./bookmarklet.txt", '_blank');
 
     }
 
